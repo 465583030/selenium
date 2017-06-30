@@ -1258,11 +1258,11 @@ func (elem *remoteWE) location(suffix string) (*Point, error) {
 		if err != nil {
 			return nil, err
 		}
-		reply := new(struct{ Value Point })
+		reply := new(struct{ Value rect })
 		if err := json.Unmarshal(response, reply); err != nil {
 			return nil, err
 		}
-		return &reply.Value, nil
+		return &Point{int(reply.Value.X), int(reply.Value.Y)}, nil
 	}
 
 	rect, err := elem.rect()
